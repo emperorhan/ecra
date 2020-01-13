@@ -1,0 +1,21 @@
+overwrite: true
+schema: "https://spacexdata.herokuapp.com/graphql"
+documents: ["./src/components/**/*.graphql.ts", "./src/graphql/**/*.graphql.ts"]
+generates:
+    src/generated/fragment.tsx:
+        plugins:
+            - "fragment-matcher"
+    src/generated/graphql.tsx:
+        plugins:
+            - "typescript"
+            - "typescript-operations"
+            - "typescript-react-apollo"
+        config:
+            reactApolloVersion: 3
+            reactApolloImportFrom: "@apollo/react-hooks"
+            withComponent: false
+            withHOC: false
+            withHooks: true
+        src/graphql/_generated-schema.graphql:
+            plugins:
+                - schema-ast
